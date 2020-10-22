@@ -13,6 +13,8 @@ public class Carro {
 //    @Column(name = "nome da coluna")
     private String Nome;
 
+    private String tipo;
+
     public Carro() {
     }
 
@@ -35,5 +37,13 @@ public class Carro {
 
     public void setNome(String nome) {
         Nome = nome;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

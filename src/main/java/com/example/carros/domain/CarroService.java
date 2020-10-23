@@ -61,12 +61,12 @@ public class CarroService {
         }
     }
 
-    public List<Carro> getCarrosFake() {
-        List<Carro> carros = new ArrayList<>();
-
-        carros.add(new Carro(1L, "Fusca"));
-
-        return carros;
-    }
+//    public List<Carro> getCarrosFake() {
+//        List<Carro> carros = new ArrayList<>();
+//
+//        carros.add(new Carro(1L, "Fusca"));
+//
+//        return carros;
+//    }
 
 }

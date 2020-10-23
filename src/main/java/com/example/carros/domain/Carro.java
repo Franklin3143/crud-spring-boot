@@ -1,9 +1,12 @@
 package com.example.carros.domain;
 
 
+import lombok.*;
+
 import javax.persistence.*;
 
 @Entity(name = "carro")
+@Data
 public class Carro {
 
     @Id
@@ -12,38 +15,8 @@ public class Carro {
 //    O item abaixo associa o nome da coluna caso seja diferente da variável
 //    @Column(name = "nome da coluna")
     private String Nome;
-
     private String tipo;
 
-    public Carro() {
-    }
 
-    public Carro(Long id, String nome) {
-        this.id = id;
-        Nome = nome;
-    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return Nome;
-    }
-
-    public void setNome(String nome) {
-        Nome = nome;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
 }

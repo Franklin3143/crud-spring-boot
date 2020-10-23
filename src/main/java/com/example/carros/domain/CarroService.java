@@ -40,7 +40,7 @@ public class CarroService {
         return CarroDTO.create(rep.save(carro));
     }
 
-    public Carro update(Carro carro, Long id) {
+    public CarroDTO update(Carro carro, Long id) {
         Assert.notNull(id, "Não foi possível inserir registro!");
 
         // Busca carro no banco de dados
@@ -55,19 +55,18 @@ public class CarroService {
             // Atualizar carro
             rep.save(db);
 
-            return db;
+            return CarroDTO.create(db);
         } else {
             throw new RuntimeException("Não foi possível atualizar o registro");
         }
     }
 
-    public void delete(Long id) {
-        Optional<CarroDTO> carro = getCarroById(id);
-        if (carro.isPresent()) {
+    public boolean delete(Long id) {
+        if (getCarroById(id).isPresent()) {
             rep.deleteById(id);
-        } else {
-            throw new RuntimeException("Não foi possível apagar veículo!");
+            return true;
         }
+        return false;
     }
 
 //    public List<Carro> getCarrosFake() {

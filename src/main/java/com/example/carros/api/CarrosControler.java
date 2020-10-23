@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.xml.ws.Response;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -62,16 +63,21 @@ import java.util.Optional;
         }
 
         @PutMapping("/{id}")
-        public String put(@PathVariable("id") Long id, @RequestBody Carro carro) {
-            Carro c = service.update(carro, id);
-            return "Carro atualizado com sucesso: " + c.getId();
+        public ResponseEntity put(@PathVariable("id") Long id, @RequestBody Carro carro) {
+            carro.setId(id);
+            CarroDTO c = service.update(carro, id);
+            return c != null ?
+                    ResponseEntity.ok(c) :
+                    ResponseEntity.notFound().build();
         }
 
         @DeleteMapping("/{id}")
-        public String delete (@PathVariable("id") Long id) {
-            service.delete(id);
+        public ResponseEntity delete (@PathVariable("id") Long id) {
+            boolean ok = service.delete(id);
 
-            return "Carro deletado com sucesso";
+            return ok ?
+                    ResponseEntity.ok().build() :
+                    ResponseEntity.notFound().build();
         }
     }
 

@@ -19,20 +19,20 @@ public class CarroService {
     public List<CarroDTO> getCarros() {
 
         //Essa lambda faz a mesma função que um for
-        return rep.findAll().stream().map(CarroDTO::new).collect(Collectors.toList());
+        return rep.findAll().stream().map(CarroDTO::create).collect(Collectors.toList());
 
     }
 
     public Optional<CarroDTO> getCarroById(Long id) {
 
-        return rep.findById(id).map(CarroDTO::new);
+        return rep.findById(id).map(CarroDTO::create);
 
 //        Optional<Carro> carro = rep.findById(id);
 //        return carro.map(c -> Optional.of(new CarroDTO(c))).orElse(null);
     }
 
     public List<CarroDTO> getCarroByTipo(String tipo) {
-        return rep.findAll().stream().map(CarroDTO::new).collect(Collectors.toList());
+        return rep.findAll().stream().map(CarroDTO::create).collect(Collectors.toList());
     }
 
     public Carro insert (Carro carro) {

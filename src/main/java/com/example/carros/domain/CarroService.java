@@ -1,5 +1,6 @@
 package com.example.carros.domain;
 
+import com.example.carros.dto.CarroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -7,6 +8,7 @@ import org.springframework.util.Assert;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CarroService {
@@ -14,16 +16,23 @@ public class CarroService {
     @Autowired
     private CarroRepository rep;
 
-    public Iterable<Carro> getCarros() {
-        return rep.findAll();
+    public List<CarroDTO> getCarros() {
+
+        //Essa lambda faz a mesma função que um for
+        return rep.findAll().stream().map(CarroDTO::new).collect(Collectors.toList());
+
     }
 
-    public Optional<Carro> getCarroById(Long id) {
-        return rep.findById(id);
+    public Optional<CarroDTO> getCarroById(Long id) {
+
+        return rep.findById(id).map(CarroDTO::new);
+
+//        Optional<Carro> carro = rep.findById(id);
+//        return carro.map(c -> Optional.of(new CarroDTO(c))).orElse(null);
     }
 
-    public List<Carro> getCarroByTipo(String tipo) {
-        return rep.findByTipo(tipo);
+    public List<CarroDTO> getCarroByTipo(String tipo) {
+        return rep.findAll().stream().map(CarroDTO::new).collect(Collectors.toList());
     }
 
     public Carro insert (Carro carro) {
@@ -35,7 +44,7 @@ public class CarroService {
         Assert.notNull(id, "Não foi possível inserir registro!");
 
         // Busca carro no banco de dados
-        Optional<Carro> optional = getCarroById(id);
+        Optional<Carro> optional = rep.findById(id);
         if (optional.isPresent()) {
             Carro db = optional.get();
             // Copia as propriedades
@@ -53,7 +62,7 @@ public class CarroService {
     }
 
     public void delete(Long id) {
-        Optional<Carro> carro = getCarroById(id);
+        Optional<CarroDTO> carro = getCarroById(id);
         if (carro.isPresent()) {
             rep.deleteById(id);
         } else {

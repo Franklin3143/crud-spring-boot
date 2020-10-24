@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -69,12 +68,5 @@ public class CarroService {
         return false;
     }
 
-//    public List<Carro> getCarrosFake() {
-//        List<Carro> carros = new ArrayList<>();
-//
-//        carros.add(new Carro(1L, "Fusca"));
-//
-//        return carros;
-//    }
 
 }

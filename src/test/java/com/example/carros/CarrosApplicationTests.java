@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
 import java.util.Optional;
 
 import static junit.framework.TestCase.*;
@@ -21,7 +22,7 @@ class CarrosApplicationTests {
     private CarroService service;
 
     @Test
-    void test1() {
+    public void testSave() {
 
         Carro carro = new Carro();
         carro.setNome("Ferrari");
@@ -48,7 +49,24 @@ class CarrosApplicationTests {
         //Verificar se deletou
         assertFalse(service.getCarroById(id).isPresent());
 
-
     }
+
+    @Test
+    public void testLista() {
+        List<CarroDTO> carros = service.getCarros();
+        assertEquals(30, carros.size());
+    }
+
+    @Test
+    public void testGet() {
+        Optional<CarroDTO> op = service.getCarroById(11L);
+
+        assertTrue(op.isPresent());
+
+        CarroDTO c = op.get();
+
+        assertEquals("Ferrari FF", c.getNome());
+    }
+
 
 }

@@ -16,6 +16,11 @@ public class Carro {
 //    @Column(name = "nome da coluna")
     private String Nome;
     private String tipo;
+//    private String descricao;
+//    private String urlFoto;
+//    private String urlVideo;
+//    private String latitude;
+//    private String longitude;
 
 
 

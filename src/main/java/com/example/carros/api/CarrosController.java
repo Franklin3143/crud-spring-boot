@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
     @RequestMapping("/api/v1/carros")
-    public class CarrosControler {
+    public class CarrosController {
 
         @Autowired
         private CarroService service;
@@ -27,12 +27,14 @@ import java.util.Optional;
 
         @GetMapping("/{id}")
         public ResponseEntity get(@PathVariable("id") Long id) {
-        Optional<CarroDTO> carro = service.getCarroById(id);
+            CarroDTO carro = service.getCarroById(id);
 
-        // if ternário
-        return carro.isPresent() ?
-                ResponseEntity.ok(carro.get()) :
-                ResponseEntity.notFound().build();
+            return ResponseEntity.ok(carro);
+
+//          if ternário
+//        return carro.isPresent() ?
+//                ResponseEntity.ok(carro.get()) :
+//                ResponseEntity.notFound().build();
         }
 
         @GetMapping("/tipo/{tipo}")
@@ -46,15 +48,12 @@ import java.util.Optional;
 
         @PostMapping
         public ResponseEntity post ( @RequestBody Carro carro) {
-            try {
+
                 CarroDTO c = service.insert(carro);
 
                 URI location = getUri(c.getId());
                 return ResponseEntity.created(location).build();
-            } catch (Exception ex) {
-                return ResponseEntity.badRequest().build();
             }
-        }
 
         private URI getUri(Long id) {
             return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -72,11 +71,9 @@ import java.util.Optional;
 
         @DeleteMapping("/{id}")
         public ResponseEntity delete (@PathVariable("id") Long id) {
-            boolean ok = service.delete(id);
+            service.delete(id);
 
-            return ok ?
-                    ResponseEntity.ok().build() :
-                    ResponseEntity.notFound().build();
+            return ResponseEntity.ok().build();
         }
     }
 

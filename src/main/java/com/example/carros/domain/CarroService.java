@@ -1,6 +1,6 @@
 package com.example.carros.domain;
 
-import com.example.carros.domain.exception.ObjectNotFoundException;
+import com.example.carros.api.exception.ObjectNotFoundException;
 import com.example.carros.dto.CarroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

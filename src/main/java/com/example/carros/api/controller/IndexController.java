@@ -1,4 +1,4 @@
-package com.example.carros.api;
+package com.example.carros.api.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
